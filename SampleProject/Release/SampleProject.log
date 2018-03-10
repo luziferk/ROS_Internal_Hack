@@ -1,0 +1,9 @@
+﻿  stdafx.cpp
+  dllmain.cpp
+  main.cpp
+MSVCRT.lib(initializers.obj) : warning LNK4098: defaultlib 'libcmt.lib' conflicts with use of other libs; use /NODEFAULTLIB:library
+  Generating code
+  All 124 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  SampleProject.vcxproj -> C:\Users\ARIES03\documents\visual studio 2015\Projects\SampleProject\Release\SampleProject.dll
+  SampleProject.vcxproj -> C:\Users\ARIES03\documents\visual studio 2015\Projects\SampleProject\Release\SampleProject.pdb (Full PDB)
