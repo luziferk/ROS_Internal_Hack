@@ -98,34 +98,43 @@ HRESULT APIENTRY DrawIndexedPrimitive_hook(IDirect3DDevice9* pDevice, D3DPRIMITI
 		if ((Stride == 36 && mStartregister == 20 || Stride == 36 && mStartregister == 21 || Stride == 36 && mStartregister == 8 && mVectorCount == 1) || //models
 			(Stride == 48 || Stride == 36 && mStartregister == 17))//weapons
 		{
-			//float sGreen[4] = { 0.0f, 1.0f, 0.0f, 1.0f };
-			//pDevice->SetPixelShaderConstantF(0, sGreen, 4);
 			pDevice->SetTexture(0, Green);
 			float bias = 1000.0f;
 			float bias_float = static_cast<float>(-bias);
 			bias_float /= 10000.0f;
 			pDevice->SetRenderState(D3DRS_DEPTHBIAS, *(DWORD*)&bias_float);
-			//wall hack
-			DrawIndexedPrimitive_orig(pDevice, Type, BaseVertexIndex, MinVertexIndex, NumVertices, startIndex, primCount);
+
+			//This would be the draw index for wallhack 
+			if (DrawIndexedPrimitive_orig(pDevice, Type, BaseVertexIndex, MinVertexIndex, NumVertices, startIndex, primCount)) {
+				
+			}
+			else {
+				pDevice->SetTexture(0, Red);
+			}
+			//DrawIndexedPrimitive_orig(pDevice, Type, BaseVertexIndex, MinVertexIndex, NumVertices, startIndex, primCount);
 			pDevice->SetRenderState(D3DRS_DEPTHBIAS, 0);
 		}
 	}
-	if (redz)
-	{
+	
 		if ((Stride == 36 && mStartregister == 20 || Stride == 36 && mStartregister == 21 || Stride == 36 && mStartregister == 8 && mVectorCount == 1) || //models
 			(Stride == 48 || Stride == 36 && mStartregister == 17))//weapons
 		{
-			//float sGreen[4] = { 0.0f, 1.0f, 0.0f, 1.0f };
-			//pDevice->SetPixelShaderConstantF(0, sGreen, 4);
+			//red for not seen player
 			pDevice->SetTexture(0, Red);
+			pDevice->SetRenderState(D3DRS_ZENABLE, FALSE);
+
 			float bias = 1000.0f;
 			float bias_float = static_cast<float>(-bias);
 			bias_float /= 10000.0f;
 			pDevice->SetRenderState(D3DRS_DEPTHBIAS, *(DWORD*)&bias_float);
 			DrawIndexedPrimitive_orig(pDevice, Type, BaseVertexIndex, MinVertexIndex, NumVertices, startIndex, primCount);
 			pDevice->SetRenderState(D3DRS_DEPTHBIAS, 0);
+
+			//green for seen player
+			pDevice->SetRenderState(D3DRS_ZENABLE, TRUE);
+			pDevice->SetTexture(0, Green);
 		}
-	}
+	
 	if (yellowz)
 	{
 		if ((Stride == 36 && mStartregister == 20 || Stride == 36 && mStartregister == 21 || Stride == 36 && mStartregister == 8 && mVectorCount == 1) || //models
@@ -145,18 +154,18 @@ HRESULT APIENTRY DrawIndexedPrimitive_hook(IDirect3DDevice9* pDevice, D3DPRIMITI
 	//wallhack 
 
 
-	/*
-	//alternative wallhack
-	if ((Stride == 36 && mStartregister == 20 || Stride == 36 && mStartregister == 21 || Stride == 36 && mStartregister == 8 && mVectorCount == 1) || //models
-	(Stride == 48 || Stride == 36 && mStartregister == 17))//weapons
-	{
-	pDevice->SetTexture(0, Red);
-	pDevice->SetRenderState(D3DRS_ZENABLE, FALSE);
-	DrawIndexedPrimitive_orig(pDevice, Type, BaseVertexIndex, MinVertexIndex, NumVertices, startIndex, primCount);
-	pDevice->SetRenderState(D3DRS_ZENABLE, TRUE);
-	pDevice->SetTexture(0, Green);
-	}
-	*/
+	
+	////alternative wallhack
+	//if ((Stride == 36 && mStartregister == 20 || Stride == 36 && mStartregister == 21 || Stride == 36 && mStartregister == 8 && mVectorCount == 1) || //models
+	//(Stride == 48 || Stride == 36 && mStartregister == 17))//weapons
+	//{
+	//pDevice->SetTexture(0, Red);
+	//pDevice->SetRenderState(D3DRS_ZENABLE, FALSE);
+	//DrawIndexedPrimitive_orig(pDevice, Type, BaseVertexIndex, MinVertexIndex, NumVertices, startIndex, primCount);
+	//pDevice->SetRenderState(D3DRS_ZENABLE, TRUE);
+	//pDevice->SetTexture(0, Green);
+	//}
+	
 
 	//worldtoscreen weapons in hand
 	if (Stride == 48) //weapons in hand
@@ -188,22 +197,22 @@ HRESULT APIENTRY EndScene_hook(IDirect3DDevice9* pDevice)
 	if (GetAsyncKeyState(VK_UP))
 	{
 		greenz = !greenz;
-		DrawString(Font, 100, 80, D3DCOLOR_ARGB(255, 255, 255, 255), "Green Activated!");
+		//DrawString(Font, 100, 80, D3DCOLOR_ARGB(255, 255, 255, 255), "Green Activated!");
 	}
 	if (GetAsyncKeyState(VK_DOWN))
 	{
 		redz = !redz;
-		DrawString(Font, 100, 80, D3DCOLOR_ARGB(255, 255, 255, 255), "Red Activated!");
+		//DrawString(Font, 100, 80, D3DCOLOR_ARGB(255, 255, 255, 255), "Red Activated!");
 	}
 	if (GetAsyncKeyState(VK_LEFT))
 	{
 		yellowz = !yellowz;
-		DrawString(Font, 100, 80, D3DCOLOR_ARGB(255, 255, 255, 255), "Yellow Activated!");
+		//DrawString(Font, 100, 80, D3DCOLOR_ARGB(255, 255, 255, 255), "Yellow Activated!");
 	}
 	if (GetAsyncKeyState(VK_RIGHT))
 	{
 		Purplez = !Purplez;
-		DrawString(Font, 100, 80, D3DCOLOR_ARGB(255, 255, 255, 255), "Yellow Activated!");
+		//DrawString(Font, 100, 80, D3DCOLOR_ARGB(255, 255, 255, 255), "Yellow Activated!");
 	}
 	//create font
 	if (Font == NULL)
