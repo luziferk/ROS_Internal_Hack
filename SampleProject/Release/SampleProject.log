@@ -1,9 +1,20 @@
 ﻿  stdafx.cpp
-  dllmain.cpp
   main.cpp
-MSVCRT.lib(initializers.obj) : warning LNK4098: defaultlib 'libcmt.lib' conflicts with use of other libs; use /NODEFAULTLIB:library
+main.cpp(144): warning C4305: '=': truncation from 'double' to 'FLOAT'
+main.cpp(148): warning C4305: '=': truncation from 'double' to 'FLOAT'
+main.cpp(160): warning C4305: '=': truncation from 'double' to 'FLOAT'
+main.cpp(165): warning C4305: '=': truncation from 'double' to 'FLOAT'
+main.cpp(166): warning C4305: '=': truncation from 'double' to 'FLOAT'
+main.cpp(226): warning C4552: '!': operator has no effect; expected operator with side-effect
+LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
   Generating code
-  All 120 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+d:\ros_hack\dll_ros_player_chams\sampleproject\main.cpp(383): warning C4715: 'Reset_hook': not all control paths return a value
+d:\ros_hack\dll_ros_player_chams\sampleproject\main.cpp(97): warning C4715: 'SetVertexShaderConstantF_hook': not all control paths return a value
+d:\ros_hack\dll_ros_player_chams\sampleproject\main.cpp(77): warning C4715: 'SetStreamSource_hook': not all control paths return a value
+d:\ros_hack\dll_ros_player_chams\sampleproject\main.cpp(293): warning C4715: 'EndScene_hook': not all control paths return a value
+d:\ros_hack\dll_ros_player_chams\sampleproject\main.cpp(196): warning C4715: 'DrawIndexedPrimitive_hook': not all control paths return a value
+d:\ros_hack\dll_ros_player_chams\sampleproject\main.cpp(472): warning C4715: 'RosD3D': not all control paths return a value
+  All 127 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   Finished generating code
   SampleProject.vcxproj -> D:\ROS_Hack\DLL_Ros_Player_Chams\Release\SampleProject.dll
   SampleProject.vcxproj -> D:\ROS_Hack\DLL_Ros_Player_Chams\Release\SampleProject.pdb (Full PDB)
